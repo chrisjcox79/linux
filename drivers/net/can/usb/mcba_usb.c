@@ -584,6 +584,8 @@ static void mcba_usb_read_bulk_callback(struct urb *urb)
 	case -EPIPE:
 	case -EPROTO:
 	case -ESHUTDOWN:
+		usb_free_coherent(urb->dev, urb->transfer_buffer_length,
+					urb->transfer_buffer, urb->transfer_dma);
 		return;
 
 	default:
